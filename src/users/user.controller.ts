@@ -12,7 +12,6 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { SerializeInterceptor } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { serialize } from '../interceptors/serialize.interceptor';
 @Controller('auth')
