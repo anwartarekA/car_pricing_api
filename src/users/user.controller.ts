@@ -34,13 +34,9 @@ export class UserController {
     session.userId = user.id;
     return user;
   }
-  @Get('/color/:color')
-  setColor(@Param('color') color: string, @Session() session: any) {
-    session.color = color;
-  }
-  @Get('/color')
-  getColor(@Session() session: any) {
-    return session.color;
+  @Post('/signout')
+  signout(@Session() session: any) {
+    session.userId = null;
   }
   @Get()
   findAll(@Query('email') query: string) {
