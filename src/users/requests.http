@@ -34,3 +34,5 @@ DELETE http://localhost:3000/auth/17 HTTP//1.1
 
 ### signout
 POST http://localhost:3000/auth/signout HTTP//1.1
+### whoami
+GET http://localhost:3000/auth/whoami HTTP//1.1

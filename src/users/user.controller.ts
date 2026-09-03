@@ -38,6 +38,10 @@ export class UserController {
   signout(@Session() session: any) {
     session.userId = null;
   }
+  @Get('/whoami')
+  whoami(@Session() session: any) {
+    return this.userService.findOne(session.userId);
+  }
   @Get()
   findAll(@Query('email') query: string) {
     return this.userService.find(query);
