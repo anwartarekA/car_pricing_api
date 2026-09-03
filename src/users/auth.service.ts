@@ -22,4 +22,10 @@ export class AuthService {
     const user = await this.userService.create(email, result);
     return user;
   }
+  // signin
+  async signin(email: string, password: string) {
+    // get user based on login email
+    const [user] = await this.userService.find(email);
+    if (!user) throw new NotFoundException('user not found');
+  }
 }
