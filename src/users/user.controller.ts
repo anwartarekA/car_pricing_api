@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   Session,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
@@ -15,9 +16,11 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
 import { serialize } from '../interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
-import { CurrentUser } from './decorators/current-user.decorator';#
-import {User} from './user.entity'
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 @Controller('auth')
+@UseInterceptors(CurrentUserInterceptor)
 @serialize(UserDto)
 export class UserController {
   constructor(
@@ -41,7 +44,7 @@ export class UserController {
     session.userId = null;
   }
   @Get('/whoami')
-  whoami(@CurrentUser() user:User) {
+  whoami(@CurrentUser() user: User) {
     return user;
   }
   @Get()
