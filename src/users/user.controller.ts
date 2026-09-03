@@ -9,6 +9,7 @@ import {
   Query,
   Session,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
@@ -19,6 +20,7 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 @Controller('auth')
 @UseInterceptors(CurrentUserInterceptor)
 @serialize(UserDto)
@@ -43,6 +45,7 @@ export class UserController {
   signout(@Session() session: any) {
     session.userId = null;
   }
+  @UseGuards(AuthGuard)
   @Get('/whoami')
   whoami(@CurrentUser() user: User) {
     return user;
