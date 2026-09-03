@@ -26,6 +26,10 @@ export class UserController {
   createUser(@Body() body: CreateUserDto) {
     return this.authService.signup(body.email, body.password);
   }
+  @Post('/signin')
+  signin(@Body() body: CreateUserDto) {
+    return this.authService.signin(body.email, body.password);
+  }
   @Get()
   findAll(@Query('email') query: string) {
     return this.userService.find(query);
